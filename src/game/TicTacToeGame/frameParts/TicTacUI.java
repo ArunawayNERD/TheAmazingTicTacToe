@@ -1,7 +1,7 @@
-package game.TicTacToeGame.frameParts;
+package game.ticTacToeGame.frameParts;
 
 import game.Game;
-import game.TicTacToeGame.TicTacToe;
+import game.ticTacToeGame.TicTacToe;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -57,20 +57,6 @@ public class TicTacUI extends JPanel
 		ticTacToeBoard.restart();
 	}
 	
-	public void pass()
-	{
-		int currentPlayer = ticTacToeBoard.getCurrentPlyer();
-		
-		if(currentPlayer == 1)
-		{
-			ticTacToeBoard.setPlayer(2);
-		}
-		else if(currentPlayer == 2)
-		{
-			ticTacToeBoard.setPlayer(1);
-		}
-	}
-
     public TicTacToe getOwnerTicTacToe()
     {
         return owner;

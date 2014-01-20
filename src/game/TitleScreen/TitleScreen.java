@@ -18,7 +18,8 @@ public class TitleScreen extends JPanel implements ActionListener
     private JButton [] buttons = new JButton[4];
 
     private JLabel title;
-    private Image image;
+
+    private Image backgroundImage;
 
 	public TitleScreen()
 	{
@@ -27,7 +28,7 @@ public class TitleScreen extends JPanel implements ActionListener
         GridBagConstraints constraint = new GridBagConstraints();
 
         //set Up Background Image
-        image = new ImageIcon(this.getClass().getResource("/Resources/Background/background.png")).getImage();
+        backgroundImage = new ImageIcon(this.getClass().getResource("/Resources/Background/background.png")).getImage();
 
         //sets up ands adds title
         title = new JLabel(new ImageIcon(getClass().getResource("/Resources/TitleScreen/Title.png")));
@@ -92,7 +93,12 @@ public class TitleScreen extends JPanel implements ActionListener
     {
         super.paintComponent(g);
 
-        g.drawImage(image, 0,0, image.getWidth(null), image.getHeight(null), null);
+        g.drawImage(backgroundImage, 0, 0, backgroundImage.getWidth(null), backgroundImage.getHeight(null), null);
+    }
+
+    public Image getBackgroundImage()
+    {
+        return backgroundImage;
     }
 
     @Override

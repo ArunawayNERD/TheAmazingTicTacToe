@@ -1,4 +1,4 @@
-package game.TicTacToeGame.frameParts;
+package game.ticTacToeGame.frameParts;
 
 import game.EnumState;
 import game.Game;

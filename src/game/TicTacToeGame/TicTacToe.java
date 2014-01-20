@@ -1,12 +1,14 @@
-package game.TicTacToeGame;
+package game.ticTacToeGame;
 
 import game.Game;
-import game.SettingsManager;
-import game.TicTacToeGame.frameParts.TicTacUI;
+import game.ticTacToeGame.frameParts.TicTacUI;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Image;
 
 @SuppressWarnings("serial")
 public class TicTacToe extends JPanel
@@ -14,17 +16,16 @@ public class TicTacToe extends JPanel
     private Game ownerGame;
     private TicTacUI ticTacToeMenu;
 
+    private Image backgroundImage;
 
-
-    private Color backgroundColor = new Color(0,0,0, 0);
+    private Color backgroundColor = new Color(0,0,0,0);
 
 	private TicTacToe() //private constructor because it needs the other constructor to function correctly
 	{
-		this.setSize(325,250);
-
-        SettingsManager settings = new SettingsManager(); //loads settings from the settings file
+        backgroundImage = new ImageIcon(getClass().getResource("/Resources/Background/GameBackground.png")).getImage();
 
 		this.setLayout(new FlowLayout());
+        this.setOpaque(false);
 	}
 
     public TicTacToe(Game ownerGame)
@@ -37,15 +38,17 @@ public class TicTacToe extends JPanel
         add(ticTacToeMenu);
     }
 
-
     @Override
-    public void paintComponent(Graphics g)
+    protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
 
-        Image background = new ImageIcon(this.getClass().getResource("/Resources/Background/GameBackground.png")).getImage();
+        g.drawImage(backgroundImage, 0, 0 , 350, 250, null);
+    }
 
-        g.drawImage(background, 0 ,0, background.getWidth(null), background.getHeight(null), null);
+    public Image getBackgroundImage()
+    {
+        return backgroundImage;
     }
 
     public Game getOwnerGame()

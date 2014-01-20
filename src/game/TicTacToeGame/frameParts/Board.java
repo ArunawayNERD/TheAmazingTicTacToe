@@ -1,4 +1,4 @@
-package game.TicTacToeGame.frameParts;
+package game.ticTacToeGame.frameParts;
 
 import game.Point;
 
@@ -46,14 +46,15 @@ public class Board extends JPanel
 			constraint.ipady = verticalPadding;
 			
 			this.add(gameBoard[i], constraint);
+            this.setOpaque(false);
 		}
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		
+
 		Graphics2D g2 = (Graphics2D) g;
 
         g2.setColor(Color.WHITE);
@@ -62,8 +63,8 @@ public class Board extends JPanel
 		for(int i = 0; i < 4; i++)
 		{
 			line = new Rectangle();
-			
-			switch(i)
+
+   			switch(i)
 			{				
 							//gets the x pos and adds the width (adjusted for the padding). then adds 5 to put it in the middle
 				case 0 : 	line.x = gameBoard[0].getX() + (gameBoard[0].getWidth() - horizontalPadding / 2) + 5; //pos
@@ -112,9 +113,20 @@ public class Board extends JPanel
 		
 		//if the tile has already been clicked or the game is over. exit the method
 		if(clickedTile.getState() == 0 && !gameWon)
-			clickedTile.updateState(player);
+        {
+			if(player == 1)
+            {
+                clickedTile.updateState(EnumTileState.X_STATE);
+            }
+            else if(player == 2)
+            {
+                clickedTile.updateState(EnumTileState.O_STATE);
+            }
+        }
 		else
+        {
 			return;
+        }
 			
 		//Logic to check for win
 		if(checkIfGameWon(clickedTile)) //drawing the line is done by checkIfGameWon()
@@ -339,7 +351,7 @@ public class Board extends JPanel
 	{
 		for(Tile t : gameBoard)
 		{
-			t.updateState(0);
+			t.updateState(EnumTileState.BLANK);
 		}
 		
 		player = 1;

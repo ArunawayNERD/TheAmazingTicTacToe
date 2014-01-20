@@ -1,6 +1,6 @@
 package game;
 
-import game.TicTacToeGame.TicTacToe;
+import game.ticTacToeGame.TicTacToe;
 import game.TitleScreen.TitleScreen;
 
 import javax.swing.ImageIcon;
@@ -18,16 +18,13 @@ public class Game extends JFrame
     public Game()
     {
         super("The Amazing Tic Tac Toe");
-        this.setIconImage(new ImageIcon(this.getClass().getResource("/Resources/Black/x.png")).getImage());
+        this.setIconImage(new ImageIcon(this.getClass().getResource("/Resources/Tiles/x.png")).getImage());
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.setSize(355, 275);
         this.setLocation(5, 5);
         this.setResizable(false);
-
-
-
 
         title = new TitleScreen(this);
         game = new TicTacToe(this);
@@ -40,10 +37,10 @@ public class Game extends JFrame
     {
         switch(switchToState)
         {
-            case TITLE_STATE:    changeState(title);
+            case TITLE_STATE:  changeState(title);
                                 break;
 
-            case GAME_STATE:     game = new TicTacToe(this); //remakes the game so that the last tile states aren't still maintained
+            case GAME_STATE:    game = new TicTacToe(this); //remakes the game so that the last tile states aren't still maintained
                                 changeState(game);
                                 break;
         }
