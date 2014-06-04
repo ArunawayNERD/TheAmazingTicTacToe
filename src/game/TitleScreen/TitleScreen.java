@@ -3,10 +3,7 @@ package game.TitleScreen;
 import game.Game;
 
 import javax.swing.*;
-import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,14 +11,18 @@ import java.awt.event.ActionListener;
 public class TitleScreen extends JPanel implements ActionListener
 {
     private Game owner;
-    private JButton [] buttons = new JButton[4];
+    private JButton [] buttons = new JButton[2];
 
     private JLabel title;
 
     private Image backgroundImage;
 
-	public TitleScreen()
+    public TitleScreen(Game owner)
 	{
+
+        //TODO set up this layout in a much better way. 
+        this.owner = owner;
+
         this.setLayout(new GridBagLayout());
 
         GridBagConstraints constraint = new GridBagConstraints();
@@ -35,6 +36,7 @@ public class TitleScreen extends JPanel implements ActionListener
 
         constraint.gridwidth = 2;
         constraint.weightx = 1;
+        constraint.insets = new Insets(0,0, owner.getHeight() - 175, 0);
         constraint.anchor = GridBagConstraints.PAGE_START;
 
         add(title, constraint);
@@ -48,17 +50,18 @@ public class TitleScreen extends JPanel implements ActionListener
             {
                 case 0 :    buttons[i] = new JButton(new ImageIcon(getClass().getResource("/Resources/TitleScreen/Play.png")));
                             buttons[i].setRolloverIcon(new ImageIcon(getClass().getResource("/Resources/TitleScreen/PlayActive.png")));
+                            constraint.gridy = 1;
                             break;
 
-                case 1 :    buttons[i] = new JButton(new ImageIcon(getClass().getResource("/Resources/TitleScreen/Help.png")));
-                            buttons[i].setRolloverIcon(new ImageIcon(getClass().getResource("/Resources/TitleScreen/HelpActive.png")));
-                            break;
+//                case 1 :    buttons[i] = new JButton(new ImageIcon(getClass().getResource("/Resources/TitleScreen/Help.png")));
+//                            buttons[i].setRolloverIcon(new ImageIcon(getClass().getResource("/Resources/TitleScreen/HelpActive.png")));
+//                            break;
+//
+//                case 2 :    buttons[i] = new JButton(new ImageIcon(getClass().getResource("/Resources/TitleScreen/Options.png")));
+//                            buttons[i].setRolloverIcon(new ImageIcon(getClass().getResource("/Resources/TitleScreen/OptionsActive.png")));
+//                            break;
 
-                case 2 :    buttons[i] = new JButton(new ImageIcon(getClass().getResource("/Resources/TitleScreen/Options.png")));
-                            buttons[i].setRolloverIcon(new ImageIcon(getClass().getResource("/Resources/TitleScreen/OptionsActive.png")));
-                            break;
-
-                case 3 :    buttons[i] = new JButton(new ImageIcon(getClass().getResource("/Resources/TitleScreen/Exit.png")));
+                case 1 :    buttons[i] = new JButton(new ImageIcon(getClass().getResource("/Resources/TitleScreen/Exit.png")));
                             buttons[i].setRolloverIcon(new ImageIcon(getClass().getResource("/Resources/TitleScreen/ExitActive.png")));
                             break;
             }
@@ -66,7 +69,7 @@ public class TitleScreen extends JPanel implements ActionListener
             constraint.gridx = 0;
             constraint.gridy = 1 + i;
             constraint.weightx = .01;
-            constraint.weighty = .01;
+            constraint.weighty = 0.1;
             constraint.gridwidth = 1;
             constraint.ipadx = 0;
             constraint.anchor = GridBagConstraints.WEST;
@@ -80,12 +83,6 @@ public class TitleScreen extends JPanel implements ActionListener
             this.add(buttons[i], constraint);
         }
 	}
-
-    public TitleScreen(Game owner)
-    {
-        this();
-        this.owner = owner;
-    }
 
     @Override
     public void paintComponent(Graphics g)
@@ -113,15 +110,15 @@ public class TitleScreen extends JPanel implements ActionListener
                     owner.switchState(Game.EnumState.GAME_STATE);
                 }
             }
+//            else if(clicked == buttons[1])
+//            {
+//                JOptionPane.showMessageDialog(this, "Help Info will be here at a later date");
+//            }
+//            else if(clicked == buttons[2])
+//            {
+//                JOptionPane.showMessageDialog(this, "Options will be here at a later date");
+//            }
             else if(clicked == buttons[1])
-            {
-                JOptionPane.showMessageDialog(this, "Help Info will be here at a later date");
-            }
-            else if(clicked == buttons[2])
-            {
-                JOptionPane.showMessageDialog(this, "Options will be here at a later date");
-            }
-            else if(clicked == buttons[3])
             {
                 System.exit(0);
             }

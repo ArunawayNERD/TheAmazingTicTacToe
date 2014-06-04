@@ -40,7 +40,7 @@ public class Game extends JFrame
             case TITLE_STATE:  changeState(title);
                                 break;
 
-            case GAME_STATE:    game = new TicTacToe(this); //remakes the game so that the last tile states aren't still maintained
+            case GAME_STATE:    game = new TicTacToe(this); //remakes the game so that the last tile states aren't maintained
                                 changeState(game);
                                 break;
         }
@@ -70,6 +70,6 @@ public class Game extends JFrame
 
     public enum EnumState
     {
-        TITLE_STATE, GAME_STATE, HELP_STATE, OPTTION_STATE;
+        TITLE_STATE, GAME_STATE
     }
 }

@@ -20,20 +20,14 @@ public class TicTacToe extends JPanel
 
     private Color backgroundColor = new Color(0,0,0,0);
 
-	private TicTacToe() //private constructor because it needs the other constructor to function correctly
-	{
-        backgroundImage = new ImageIcon(getClass().getResource("/Resources/Background/GameBackground.png")).getImage();
-
-		this.setLayout(new FlowLayout());
-	}
-
     public TicTacToe(Game ownerGame)
     {
-        this();
+        backgroundImage = new ImageIcon(getClass().getResource("/Resources/Background/GameBackground.png")).getImage();
+        this.setLayout(new FlowLayout());
+
         this.ownerGame = ownerGame;
 
         ticTacToeMenu = new TicTacUI(this, ownerGame); //in this constructor because it needs the game owner
-        ticTacToeMenu.setPanelAndFieldBackground(backgroundColor);
         add(ticTacToeMenu);
     }
 

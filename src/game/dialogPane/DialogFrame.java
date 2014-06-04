@@ -39,7 +39,6 @@ public class DialogFrame extends JFrame
         backgroundImage = new ImageIcon(this.getClass().getResource("/Resources/DialogPane/Background.png"));
         setSize(backgroundImage.getIconWidth(), backgroundImage.getIconHeight() + 15);
 
-
         setVisible(true);
 
     }

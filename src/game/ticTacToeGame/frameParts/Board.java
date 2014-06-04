@@ -11,7 +11,7 @@ import java.awt.*;
 /**
  * This class holds the "board" for the game. It holds all the game tiles and handles their logic
  * 
- * @version 11/27/13
+ * Last Modified: 6/4/2014
  */
 @SuppressWarnings("serial")
 public class Board extends JPanel
@@ -69,46 +69,42 @@ public class Board extends JPanel
 
         g2.setColor(Color.WHITE);
 		Rectangle line;
-		
-		for(int i = 0; i < 4; i++)
+
+        for(int i = 0; i < 2; i++)
 		{
 			line = new Rectangle();
 
    			switch(i)
-			{				
-							//gets the x pos and adds the width (adjusted for the padding). then adds 5 to put it in the middle
-				case 0 : 	line.x = gameBoard[0].getX() + (gameBoard[0].getWidth() - horizontalPadding / 2) + 5; //pos
-							line.y = 0;
-							line.width = 4;
-							line.height = this.getHeight();
-							break;
-							
-							//gets the x pos and adds the width (adjusted for the padding). then adds 5 to put it in the middle
-				case 1 : 	line.x = gameBoard[1].getX() + (gameBoard[1].getWidth() - horizontalPadding / 2) + 5;
-							line.y = 0;
-							line.width = 4;
-							line.height = this.getHeight();
-							break;
-							
-				case 2 :	line.x = gameBoard[0].getX();
-							
-							//gets the y pos and adds the height(adjusted for the padding). then adds 5 to put it in the middle
-							line.y = gameBoard[0].getY() + (gameBoard[0].getHeight() - verticalPadding / 2) + 5;
-							line.width = ((gameBoard[5].getX() + gameBoard[5].getWidth()) - line.x); //distance from the left x pos to the right x pos
-							line.height = 4;
-							break;
-							
-				case 3 :	line.x = gameBoard[3].getX();
-					
-							//gets the y pos and adds the height(adjusted for the padding). then adds 5 to put it in the middle
-							line.y = gameBoard[3].getY() + (gameBoard[3].getHeight() - verticalPadding / 2) + 5;
-							line.width = ((gameBoard[5].getX() + gameBoard[5].getWidth()) - line.x); //distance from the left x pos to the right x pos
-							line.height = 4;
-							break;
-			}
-			
-			g2.fill(line);
-		}
+			{
+                //draws the vertical lines of the board
+                case 0: line.x = gameBoard[i].getX() + (gameBoard[i].getWidth() - horizontalPadding / 2) + 5;
+                        line.y = 0;
+                        line.width = 4;
+                        line.height = this.getHeight();
+                        g2.fill(line);
+
+                        //second verse same as the first...well second line... anyway only change is the x position
+                        line.x = gameBoard[i + 1].getX() + (gameBoard[i + 1].getWidth() - horizontalPadding / 2) + 5;
+                        g2.fill(line);
+                        break;
+
+                //draws the horizontal lines
+                case 1: line.x = gameBoard[0].getX();
+
+                        //gets the y pos and adds the height(adjusted for the padding). then adds 5 to put it in the middle
+                        line.y = gameBoard[0].getY() + (gameBoard[0].getHeight() - verticalPadding / 2) + 5;
+                        line.width = ((gameBoard[5].getX() + gameBoard[5].getWidth()) - line.x); //distance from the left x pos to the right x pos
+                        line.height = 4;
+                        g2.fill(line);
+
+                        //second line. only thing that chnages is the y pos
+                        line.y = gameBoard[3].getY() + (gameBoard[3].getHeight() - verticalPadding / 2) + 5;
+                        g2.fill(line);
+                        break;
+            }
+
+            g2.fill(line);
+        }
 	}
 
 	/**
@@ -153,11 +149,7 @@ public class Board extends JPanel
             {
                 msgType = DialogMessage.PLAYER_TWO;
             }
-//			JOptionPane.showMessageDialog(this.getParent(), "Player " + player + "has won the game!");
-//            JOptionPane.showMessageDialog(this.getParent(), new DialogPanel("Player " + player + "has won the game!"), " ", JOptionPane.PLAIN_MESSAGE);
-//            endDialog = new DialogFrame(ownerGame, "Game Over!", true, new DialogPanel("Player " + player + "has won the game!"));
             new DialogFrame(ownerGame, msgType);
-//            endDialog.showMessage();
 		}
 
 		//checks for tie because no one won.

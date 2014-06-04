@@ -18,26 +18,34 @@ public class ButtonPanel extends JPanel implements ActionListener
 
     private JButton [] buttons = new JButton [2];
 
-	public ButtonPanel()
+	public ButtonPanel(TicTacUI owner, Game ownerGame)
 	{
-		this.setOpaque(false);
+        this.setOpaque(false);
 
         //sets the space between components and the frame to be 5 pixels
         FlowLayout frameLayout = (FlowLayout) this.getLayout();
         frameLayout.setHgap(5);
 
-		for(int i = 0; i < buttons.length; i++)
-		{
-			switch(i)
-			{
-				case 0 : 	buttons[i] = new JButton(new ImageIcon(getClass().getResource("/Resources/ButtonPanel/Restart.png")));
-                            buttons[i].setRolloverIcon(new ImageIcon(this.getClass().getResource("/Resources/ButtonPanel/RestartActive.png")));
-							break;
-							
-				case 1 : 	buttons[i] = new JButton(new ImageIcon(getClass().getResource("/Resources/ButtonPanel/Exit.png")));
-                            buttons[i].setRolloverIcon(new ImageIcon(this.getClass().getResource("/Resources/ButtonPanel/ExitActive.png")));
-							break;
-			}
+		this.owner = owner;
+        this.ownerGame = ownerGame;
+
+        initButtons();
+	}
+
+    private void initButtons()
+    {
+        for(int i = 0; i < buttons.length; i++)
+        {
+            switch(i)
+            {
+                case 0 : 	buttons[i] = new JButton(new ImageIcon(getClass().getResource("/Resources/ButtonPanel/Restart.png")));
+                    buttons[i].setRolloverIcon(new ImageIcon(this.getClass().getResource("/Resources/ButtonPanel/RestartActive.png")));
+                    break;
+
+                case 1 : 	buttons[i] = new JButton(new ImageIcon(getClass().getResource("/Resources/ButtonPanel/Exit.png")));
+                    buttons[i].setRolloverIcon(new ImageIcon(this.getClass().getResource("/Resources/ButtonPanel/ExitActive.png")));
+                    break;
+            }
 
             buttons[i].setBorderPainted(false);
             buttons[i].setBorder(new BorderUIResource.EmptyBorderUIResource(0,0,0,0));
@@ -47,18 +55,9 @@ public class ButtonPanel extends JPanel implements ActionListener
             buttons[i].addActionListener(this);
 //			buttons[i].setPreferredSize(new Dimension(98, 32));
 
-			add(buttons[i]);
-		}
-		
-	}
-	
-	public ButtonPanel(TicTacUI owner, Game ownerGame)
-	{
-		this();
-		this.owner = owner;
-        this.ownerGame = ownerGame;
-	}
-
+            add(buttons[i]);
+        }
+    }
 	@Override
 	public void actionPerformed(ActionEvent event)
 	{

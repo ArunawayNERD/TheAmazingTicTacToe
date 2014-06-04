@@ -4,7 +4,6 @@ import game.Game;
 import game.ticTacToeGame.TicTacToe;
 
 import javax.swing.JPanel;
-import java.awt.Color;
 import java.awt.GridLayout;
 
 @SuppressWarnings("serial")
@@ -24,7 +23,7 @@ public class TicTacUI extends JPanel
         this.owner = owner;
         this.ownerGame = ownerGame;
 
-        ticTacToeBoard = new Board(this, ownerGame); //add way for people to pick
+        ticTacToeBoard = new Board(this, ownerGame);
         add(ticTacToeBoard);
 
         utilButtons = new ButtonPanel(this, ownerGame); //in this constructor because it needs the game owner
@@ -34,20 +33,6 @@ public class TicTacUI extends JPanel
 		ticTacToeBoard.setBackground(this.getBackground());
 		utilButtons.setBackground(this.getBackground());
 	}
-
-    /**
-     * Method to set this panels background color and then set the background of its fields to the same color
-     *
-     * @param backgroundColor the color to be set as the background color
-     */
-    public void setPanelAndFieldBackground(Color backgroundColor)
-    {
-        this.setBackground(backgroundColor);
-
-        ticTacToeBoard.setBackground(this.getBackground());
-        utilButtons.setBackground(this.getBackground());
-    }
-
 
 	public void restart()
 	{
